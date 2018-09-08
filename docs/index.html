@@ -6,7 +6,16 @@
 </head>
 <body>
 	<h1>hello,world</h1>
+	<article id="main">
+	</article>
 
 	<script src="https://cdn.jsdelivr.net/npm/marked@0.5.0/lib/marked.min.js"></script>
+	<script>
+		fetch("PAGE_1.md")
+			.then( resp => resp.text() )
+			.then( markdown => {
+				document.getElementById("main").innerHTML = marked(markdown);
+			});
+	</script>
 </body>
 </html>
