@@ -11,11 +11,24 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/marked@0.5.0/lib/marked.min.js"></script>
 	<script>
+		var owner = location.hostname.replace(".github.io", "");
+		var repo = location.pathname.substring(1, location.pathname.indexOf("/", 2));
+		fetch("https://api.github.com/repos/"+owner+"/"+repo+"/contents/docs")
+		.then( resp => resp.json() )
+		.then( json => {
+			for (let contents of json)  {
+				console.log(contents);
+			}
+		})
+		;
+
+
 		fetch("PAGE_1.md")
 			.then( resp => resp.text() )
 			.then( markdown => {
 				document.getElementById("main").innerHTML = marked(markdown);
-			});
+			})
+		;
 	</script>
 </body>
 </html>
